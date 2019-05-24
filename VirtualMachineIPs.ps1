@@ -10,7 +10,8 @@
 
 <#  
 .SYNOPSIS  
-  This script takes a SubscriptionID and prints the VM list which have public IPs assigned at the current time.
+  This script takes a SubscriptionID and prints the VM list which have public IPs assigned at the current time. Another list will be printed for Virtual Machines without Public Ips and Not Assigned Status.
+  Please note : If the machine is turned off then there is no Public IP assigned hence it will show Not Assigned.
   
 .DESCRIPTION  
   This script takes a SubscriptionID and prints the VM list which have public IPs assigned at the current time.
@@ -19,7 +20,7 @@
     The subscriptionID of the Azure Subscription that contains the resources you want to analyze
 
 .EXAMPLE
-  .\VMswithPublicIp.ps1 -Subscription "XXXX-XXXX-XXXX-XXXX"
+  .\VirtualMachineIPs.ps1 -Subscription "XXXX-XXXX-XXXX-XXXX"
 
 .NOTES
    AUTHOR: Rupanter Chhabra - Azure CXP
@@ -45,7 +46,7 @@ Foreach ($ResourceGroup in $ResourceGroupNames) {
     $RGName = $ResourceGroup.ResourceGroupName
     $VirtualMachines += Get-AzVM -ResourceGroupName $RGName
     Foreach ($VirtualMachine in $VirtualMachines) {
-        $VMhash = @{}
+        $VMhash = @{ }
         $publicIpAddress = ''
         $nic = ''
         $publicIpName = ''
