@@ -40,6 +40,8 @@ $ResourceGroupNames = ''
 $VMlist = @()
 $VMlistW = @()
 
+Write-Host "Getting the details, please wait.." -ForegroundColor Yellow
+
 $ResourceGroupNames = Get-AzResourceGroup
 Foreach ($ResourceGroup in $ResourceGroupNames) {
     $VirtualMachines = @()
@@ -65,7 +67,7 @@ Foreach ($ResourceGroup in $ResourceGroupNames) {
         }
         if ($publicIpName) {
             $publicIpAddress = (Get-AzPublicIpAddress -ResourceGroupName $RGName -Name $publicIpName).IpAddress
-            $VMHash.add($Vmname, $PublicIpAddress)
+            $VMHash = New-Object PSObject -property @{VMname = $VMname; IpAddress = $PublicIpAddress; ResourceGroupName = $RGname }
         }
         if (('Not Assigned', '') -cnotcontains $publicIpAddress ) {
             $VMlist += $VMHash
@@ -76,8 +78,8 @@ Foreach ($ResourceGroup in $ResourceGroupNames) {
     }
 }
 
-Write-Output "List of VMs with Public IPs"
+Write-Host "List of VMs with Public IPs:" -ForegroundColor Cyan
 $VMlist
 
-Write-Output "List of VMs without Public IPs or are turned off"
+Write-Host "List of VMs without Public IPs or are turned off:" -ForegroundColor Cyan
 $VMlistW
