@@ -15,11 +15,13 @@
   
 .DESCRIPTION  
   This script takes a SubscriptionID and prints the VM list which have public IPs assigned at the current time.
+  Please Install Az Module before running the script. Can be found here : https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-2.1.0 
 
-.PARAMETER SubscriptionId
+.PARAMETER SubscriptionID
     The subscriptionID of the Azure Subscription that contains the resources you want to analyze
 
 .EXAMPLE
+   Please Install Az Module before running the script. Can be found here : https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-2.1.0 
   .\VirtualMachineIPs.ps1 -Subscription "XXXX-XXXX-XXXX-XXXX"
 
 .NOTES
