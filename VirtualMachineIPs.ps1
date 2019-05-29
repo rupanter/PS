@@ -42,7 +42,7 @@ $ResourceGroupNames = ''
 $VMlist = @()
 $VMlistW = @()
 
-Write-Host "Getting the details, please wait.." -ForegroundColor Yellow
+Write-Host "Getting the details, please wait..." -ForegroundColor Yellow
 
 $ResourceGroupNames = Get-AzResourceGroup
 Foreach ($ResourceGroup in $ResourceGroupNames) {
